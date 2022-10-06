@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -14,8 +15,9 @@ class CarController extends Controller
      */
     public function index()
     {
+        $owners=Owner::all();
         $cars=Car::all();
-        return view("cars.index",['cars'=>$cars]);
+        return view("cars.index",['cars'=>$cars,'owners'=>$owners]);
     }
 
     /**
@@ -25,7 +27,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('cars.create');
+        $owners=Owner::all();
+        return view('cars.create',['owners'=>$owners]);
     }
 
     /**
@@ -36,6 +39,13 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'reg_number'=>['required','alpha_num','min:6','max:6','unique:App\Models\Car,reg_number'],
+            'brand'=>['required'],
+            'model'=>['required'],
+            'owner_id'=>['required']
+        ]);
+
         $car = new Car();
         $car->reg_number=$request->reg_number;
         $car->brand=$request->brand;
@@ -64,7 +74,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view('cars.update', ['car'=>$car]);
+        $owners=Owner::all();
+        return view('cars.update', ['car'=>$car,'owners'=>$owners]);
     }
 
     /**
@@ -75,7 +86,15 @@ class CarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Car $car)
+
     {
+        $request->validate([
+            'reg_number'=>['required','alpha_num','min:6','max:6','unique:App\Models\Car,reg_number'],
+            'brand'=>['required'],
+            'model'=>['required'],
+            'owner_id'=>['required']
+        ]);
+
         $car->reg_number=$request->reg_number;
         $car->brand=$request->brand;
         $car->model=$request->model;
