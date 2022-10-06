@@ -24,6 +24,8 @@
                     <?php echo e(config('app.name', 'Laravel')); ?>
 
                 </a>
+                <a class="navbar-brand p-2" href="<?php echo e(route('cars.index')); ?>">Cars</a>
+                <a class="navbar-brand" href="<?php echo e(route('owners.index')); ?>">Owners</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -74,11 +76,13 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             <?php echo $__env->yieldContent('content'); ?>
         </main>
     </div>
+
+
+
 </body>
 </html>
 <?php /**PATH C:\xampp\htdocs\draudimas\resources\views/layouts/app.blade.php ENDPATH**/ ?>

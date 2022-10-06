@@ -17,10 +17,19 @@ use App\Models\Owner;
 |
 */
 
+Route::middleware('auth')->group(function () {
+    Route::resource('cars', CarController::class);
+    Route::resource('owners', OwnerController::class);
+
+});
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('cars', CarController::class);
-Route::resource('owners', OwnerController::class);
+//Route::resource('cars', CarController::class);
+//Route::resource('owners', OwnerController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
