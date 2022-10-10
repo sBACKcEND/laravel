@@ -15,18 +15,18 @@
 {{--                            </div>--}}
 {{--                        @endif--}}
 
-    @error ('reg_number') @enderror
+{{--    @error ('reg_number') @enderror--}}
     <form action="{{ route('cars.store') }}" method="post">
         @csrf
         <div class="mb-3">
             <label class="form-label">Reg#:</label>
             <label>
-                <input class="form-control @if ($errors->has('reg_number')) is-invalid @endif" type="text" name="reg_number" value="{{ old('reg_number') }}" required>
-                @if ($errors->has('reg_number'))
-                    @foreach($errors->get('reg_number') as $error)
-                    {{ $error }} <br>
-                    @endforeach
-                @endif
+                <input class="form-control @error('reg_number') is-invalid @enderror" type="text" name="reg_number" value="{{old('reg_number')}}" required>
+                @error('reg_number')
+                @foreach( $errors->get('reg_number') as $error)
+                    <div class="alert alert-danger"> {{ $error }} </div>
+                @endforeach
+                @enderror
             </label>
         </div>
         <div class="mb-3">
@@ -42,15 +42,16 @@
             </label>
         </div>
         <div  class="mb-3">
-            <label class="form-label">Owner</label>
+            <label class="form-label">Owner_id:</label>
+{{--            <label class="form-label">Owner</label>--}}
             <label>
-                <select class="form-control name="owner_id">
-                    <option selected>Choose</option>
-                    @foreach($owners as $owner)
-                        <option value="{{$owner->id}}">{{$owner->name}} {{$owner->surname}}</option>
-                    @endforeach
-                </select>
-{{--                <input class="form-control" type="text" name="owner_id" value="{{ old('owner_id') }}" required>--}}
+{{--                <select class="form-control name="owner_id">--}}
+{{--                    <option selected>Choose</option>--}}
+{{--                    @foreach($owners as $owner)--}}
+{{--                        <option value="{{$owner->id}}">{{$owner->name}} {{$owner->surname}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+                <input class="form-control" type="text" name="owner_id" value="{{ old('owner_id') }}" required>
             </label>
         </div>
         <button class="btn btn-primary">Add new</button>

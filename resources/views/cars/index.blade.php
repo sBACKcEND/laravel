@@ -11,6 +11,7 @@
                     <table class="table">
                         <thead>
                         <tr>
+                            <th>Images</th>
                             <th>Reg#</th>
                             <th>Car Brand</th>
                             <th>Car Model</th>
@@ -20,16 +21,24 @@
                         <tbody>
                         @foreach($cars as $car)
                             <tr>
+                                <td>
+                                <img src="{{ asset('storage/cars/'.$car->id.".jpg") }}" style="width: 200px;">
+{{--                                <td>--}}
+{{--                                    @foreach($images as $image)--}}
+{{--                                        {{ $image->name }}--}}
+{{--                                    @endforeach--}}
+                                </td>
                                 <td>{{ $car->reg_number }}</td>
                                 <td>{{ $car->brand }}</td>
                                 <td>{{ $car->model }}</td>
-                                <td><select class="form-control name="owner_id">
-                                    <option selected>Choose</option>
-                                    @foreach($owners as $owner)
-                                        <option value="{{$owner->id}}">{{$owner->name}} {{$owner->surname}}</option>
-                                        @endforeach
-                                        </select>
-                                </td>
+                                <td>{{ $car->owner_id }}</td>
+{{--                                <td> <select class="form-control name="owner_id">--}}
+{{--                                    <option selected>Choose</option>--}}
+{{--                                    @foreach($owners as $owner)--}}
+{{--                                        <option value="{{$owner->id}}">{{$owner->name}} {{$owner->surname}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                        </select>--}}
+{{--                                </td>--}}
 {{--                                <td>{{ $car->owner->name }}--}}
 {{--                                    {{ $car->owner->surname }}--}}
 
