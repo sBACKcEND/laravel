@@ -10,6 +10,7 @@
                     <table class="table">
                         <thead>
                         <tr>
+                            <th>Images</th>
                             <th>Reg#</th>
                             <th>Car Brand</th>
                             <th>Car Model</th>
@@ -19,16 +20,24 @@
                         <tbody>
                         <?php $__currentLoopData = $cars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $car): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
+                                <td>
+                                <img src="<?php echo e(asset('storage/cars/'.$car->id.".jpg")); ?>" style="width: 200px;">
+
+
+
+
+                                </td>
                                 <td><?php echo e($car->reg_number); ?></td>
                                 <td><?php echo e($car->brand); ?></td>
                                 <td><?php echo e($car->model); ?></td>
-                                <td><select class="form-control name="owner_id">
-                                    <option selected>Choose</option>
-                                    <?php $__currentLoopData = $owners; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $owner): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <option value="<?php echo e($owner->id); ?>"><?php echo e($owner->name); ?> <?php echo e($owner->surname); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </select>
-                                </td>
+                                <td><?php echo e($car->owner_id); ?></td>
+
+
+
+
+
+
+
 
 
 
