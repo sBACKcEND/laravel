@@ -9,7 +9,11 @@ class Car extends Model
 {
     use HasFactory;
 
-    public function owner(){
-        return $this->belongsTo(Owner::class);
-    }
+//    public function owner(){
+//        return $this->belongsTo(Owner::class);
+//    }
+//
+//    public function images(){
+//        return $this->hasMany(Image::class);
+//    }
 }

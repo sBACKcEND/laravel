@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Owner;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -15,9 +16,12 @@ class CarController extends Controller
      */
     public function index()
     {
-        $owners=Owner::all();
+//        $images=Image::all();
+//        $owners=Owner::all();
         $cars=Car::all();
-        return view("cars.index",['cars'=>$cars,'owners'=>$owners]);
+//        return view("cars.index",['cars'=>$cars,'owners'=>$owners, 'images'=>$images]);
+//        return view("cars.index",['cars'=>$cars, 'images'=>$images]);
+        return view("cars.index",['cars'=>$cars]);
     }
 
     /**
@@ -27,8 +31,9 @@ class CarController extends Controller
      */
     public function create()
     {
-        $owners=Owner::all();
-        return view('cars.create',['owners'=>$owners]);
+//        $owners=Owner::all();
+        return view('cars.create');
+//        return view('cars.create',['owners'=>$owners]);
     }
 
     /**
@@ -74,8 +79,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        $owners=Owner::all();
-        return view('cars.update', ['car'=>$car,'owners'=>$owners]);
+//        $owners=Owner::all();
+//        return view('cars.update', ['car'=>$car,'owners'=>$owners]);
+        return view('cars.update', ['car'=>$car]);
     }
 
     /**
@@ -98,6 +104,8 @@ class CarController extends Controller
         $car->reg_number=$request->reg_number;
         $car->brand=$request->brand;
         $car->model=$request->model;
+        $img=$request->file('image');
+        $img->storeAs('public/cars',$car->id.'.'.$img->extension());
         $car->owner_id=$request->owner_id;
         $car->save();
         return redirect()->route('cars.index');
